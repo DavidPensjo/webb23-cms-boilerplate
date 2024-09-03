@@ -5,7 +5,6 @@ import Head from "next/head";
 export default function Layout({ config, children }) {
   //Create at least a header and footer component
   const { font } = config.content;
-  console.log(`https://fonts.googleapis.com/css2?family=${font}&display=swap`);
 
   return (
     <>
