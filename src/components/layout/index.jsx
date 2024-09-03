@@ -1,5 +1,6 @@
 //Uses config set global components for the layout
 import Header from "./Header";
+import Footer from "./Footer";
 import Head from "next/head";
 
 export default function Layout({ config, children }) {
@@ -19,7 +20,7 @@ export default function Layout({ config, children }) {
       <div style={{ fontFamily: font || "default-font" }}>
         <Header config={config} />
         <main>{children}</main>
-        <footer></footer>
+        <Footer config={config}></Footer>
       </div>
     </>
   );
