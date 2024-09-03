@@ -1,12 +1,27 @@
 //Uses config set global components for the layout
+import Header from "./Header";
+import Head from "next/head";
+
 export default function Layout({ config, children }) {
-    //Create at least a header and footer component
-    //Use console.log to determine blok object structure if unsure...
-    return (
-        <>
-            <header></header>
-            <main>{children}</main>
-            <footer></footer>
-        </>
-    );
+  //Create at least a header and footer component
+  const { font } = config.content;
+  console.log(`https://fonts.googleapis.com/css2?family=${font}&display=swap`);
+
+  return (
+    <>
+      <Head>
+        {font && (
+          <link
+            href={`https://fonts.googleapis.com/css2?family=${font}&display=swap`}
+            rel="stylesheet"
+          />
+        )}
+      </Head>
+      <div style={{ fontFamily: font || "default-font" }}>
+        <Header config={config} />
+        <main>{children}</main>
+        <footer></footer>
+      </div>
+    </>
+  );
 }
