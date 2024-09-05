@@ -13,6 +13,9 @@ function Header({ config }) {
   const logoBlock = headerBlocks.find((block) => block.component === "logo");
   const logo = logoBlock ? logoBlock.logo : null;
 
+  const nameBlock = headerBlocks.find((block) => block.component === "name");
+  const name = nameBlock ? nameBlock.name : null;
+
   const bgColorBlock = headerBlocks.find((block) => block.bg_color);
   const bgColor = bgColorBlock ? bgColorBlock.bg_color : "bg-slate-300";
 
@@ -22,15 +25,17 @@ function Header({ config }) {
       {...storyblokEditable(bgColorBlock)}
     >
       <nav className="mx-auto flex items-center justify-between p-6 lg:px-8">
-        <Link href="/" {...storyblokEditable(logoBlock)}>
-          {logo && (
-            <img src={logo.filename} alt="logo" className="h-8 w-auto" />
-          )}
-        </Link>
+        <div className="flex gap-20 items-center">
+          <Link href="/" {...storyblokEditable(logoBlock)}>
+            {logo && (
+              <img src={logo.filename} alt="logo" className="h-8 w-auto" />
+            )}
+          </Link>
+          <p {...storyblokEditable(nameBlock)} className="font-bold text-gray-50 text-2xl">{name}</p>
+        </div>
         <ul className="flex" {...storyblokEditable(headerMenuBlock)}>
           {header_menu.map((item) => {
             const linkUrl = item.link.story?.url || item.link.url;
-
             return (
               <li
                 key={item._uid}
