@@ -1,9 +1,11 @@
 import React from "react";
 import { storyblokEditable } from "@storyblok/react";
 import RichTextDefault from "./RichText";
+import Image from "next/image";
+import Link from "next/link";
 
 function Hero({ blok }) {
-  const { hero_image, text } = blok;
+  const { hero_image, text, button } = blok;
 
   const { image, blur } = hero_image[0] || {};
 
@@ -14,25 +16,35 @@ function Hero({ blok }) {
       large: "blur-[5px]",
     }[blur] || "";
 
-  const scaleClass = blur ? "scale-110" : "";
-
+  const scaleClass = blur ? "scale-105" : "";
   return (
-    <div className="hero-section relative" {...storyblokEditable(blok)}>
-      <div className="hero-image overflow-hidden">
+    <div className="relative" {...storyblokEditable(blok)}>
+      <div className="w-full h-[750px] overflow-hidden object-cover relative">
         {image && (
-          <img
+          <Image
             src={image.filename}
             alt={image.alt || "Hero Image"}
-            className={`w-full h-auto object-cover transition-transform duration-500 ${blurClass} ${scaleClass}`}
+            className={`object-cover transition-transform duration-500 ${blurClass} ${scaleClass}`}
+            fill={true}
+            priority
           />
         )}
       </div>
-      <div className="hero-text absolute inset-0 flex items-center justify-center p-8">
-        {text && (
-          <h1 className="bg-black bg-opacity-50 text-white p-4 rounded text-7xl">
-            <RichTextDefault blok={{ richtext: text }} />
-          </h1>
-        )}
+      <div className="absolute inset-0 flex items-center justify-center p-8">
+        <div className="bg-black bg-opacity-50 flex p-10 rounded-md">
+          {text && (
+            <h1 className=" text-white p-4">
+              <RichTextDefault blok={{ richtext: text }} />
+            </h1>
+          )}
+          {button && (
+            <Link href={button[0].link.url}>
+              <button className="h-8 flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                {button[0].label}
+              </button>
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

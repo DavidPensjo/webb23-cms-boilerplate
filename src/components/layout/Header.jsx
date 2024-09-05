@@ -22,21 +22,25 @@ function Header({ config }) {
       {...storyblokEditable(bgColorBlock)}
     >
       <nav className="mx-auto flex items-center justify-between p-6 lg:px-8">
-        <Link href="#" {...storyblokEditable(logoBlock)}>
+        <Link href="/" {...storyblokEditable(logoBlock)}>
           {logo && (
             <img src={logo.filename} alt="logo" className="h-8 w-auto" />
           )}
         </Link>
         <ul className="flex" {...storyblokEditable(headerMenuBlock)}>
-          {header_menu.map((item) => (
-            <li
-              key={item._uid}
-              className="pr-10 font-bold text-gray-50"
-              {...storyblokEditable(item)}
-            >
-              <Link href={item.link.url}>{item.name}</Link>
-            </li>
-          ))}
+          {header_menu.map((item) => {
+            const linkUrl = item.link.story?.url || item.link.url;
+
+            return (
+              <li
+                key={item._uid}
+                className="pr-10 font-bold text-gray-50"
+                {...storyblokEditable(item)}
+              >
+                <Link href={linkUrl}>{item.name}</Link>
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </header>
