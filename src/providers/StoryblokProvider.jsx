@@ -11,6 +11,7 @@ import Hero from "@/components/nestable/Hero";
 import ImageWithText from "@/components/nestable/ImageWithText";
 import Grid from "@/components/nestable/Grid";
 import ImageWithTextLarge from "@/components/nestable/ImageWithTextLarge";
+import Article from "@/components/nestable/Article";
 
 const components = {
   page: Page,
@@ -21,6 +22,7 @@ const components = {
   image_with_text: ImageWithText,
   grid: Grid,
   image_with_text_large: ImageWithTextLarge,
+  article: Article,
 };
 
 storyblokInit({
